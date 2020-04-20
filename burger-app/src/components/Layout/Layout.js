@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactAux from '../../hoc/ReactAux'
-
+import classes from './Layout.module.css'
 const layout = (props) => (
     <ReactAux>
     <div>ToolBar ,SideDrawer , Backdrop </div>
-    <main> {props.children} </main>
+    <main className={classes.Content}> {props.children} </main>
     </ReactAux> 
 
     
