@@ -90,6 +90,9 @@ removeIngredientHandler=(type)=>{
  {
      this.setState({purchasing:true})
  }
+ purchaseCancelHandler=()=>{
+     this.setState({purchasing:false})
+ }
     render()
     {
 const disabledInfo = {
@@ -104,7 +107,8 @@ for(let key in disabledInfo)
     //    console.log('hii state' , this.oldCount)
         return (
             <ReactAux>
-                <Modal show ={this.state.purchasing}>
+                <Modal show ={this.state.purchasing}
+                modalClosed={this.purchaseCancelHandler}>
                  <OrderSummary ingredients={this.state.ingredients}/>
                </Modal>
                 <Burger ingredients={this.state.ingredients} />
