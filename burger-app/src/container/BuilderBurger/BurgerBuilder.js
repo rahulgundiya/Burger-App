@@ -84,6 +84,7 @@ for(let key in disabledInfo)
                 ingredientAdded ={this.addIngredientHandler}
                 ingredientRemoved ={this.removeIngredientHandler}
                 disabled ={disabledInfo}
+                price={this.state.totalPrice}
                 />
 
             </ReactAux>
