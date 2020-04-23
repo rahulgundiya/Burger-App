@@ -1,5 +1,5 @@
 import React , {Component} from 'react'
-import ReactAux from '../../hoc/ReactAux';
+import ReactAux from '../../hoc/ReactAux/ReactAux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls' 
 import Modal from '../../components/UI/Modal/Modal'
@@ -44,13 +44,13 @@ this.setState({purchasable: sum > 0})
 addIngredientHandler=(type)=>{
     const oldCount = this.state.ingredients[type];   //type of ingredient are 
     const updatedCount = oldCount+1;               //in ingredients                        
-    console.log('hii updatedcount' , updatedCount)
+    //console.log('hii updatedcount' , updatedCount)
    
     const updatedIngredients = {                // and pass to the oldCount
         ...this.state.ingredients                 
 
     }
-    console.log('UpdatedIngredients' ,  updatedIngredients)
+    //console.log('UpdatedIngredients' ,  updatedIngredients)
 
     updatedIngredients[type] = updatedCount;
      const priceAddition = INGREDIENT_PRICES[type];
@@ -75,7 +75,7 @@ removeIngredientHandler=(type)=>{
         ...this.state.ingredients                 
 
     }
-    console.log('UpdatedIngredients' ,  updatedIngredients)
+    //console.log('UpdatedIngredients' ,  updatedIngredients)
 
     updatedIngredients[type] = updatedCount;
      const priceDeduction = INGREDIENT_PRICES[type];

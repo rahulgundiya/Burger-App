@@ -3,7 +3,7 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems'
 import classes from './SideDrawer.module.css'
 import Backdrop from '../../UI/Backdrop/Backdrop'
-import ReactAux from '../../../hoc/ReactAux'
+import ReactAux from '../../../hoc/ReactAux/ReactAux'
 const sideDrawer=(props)=>{
     let attachedClass=[classes.SideDrawer , classes.Close]
     if(props.open)
