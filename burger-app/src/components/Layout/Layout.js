@@ -5,15 +5,21 @@ import classes from './Layout.module.css'
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer'
 class Layout extends Component {
     state={
-        showSlideDrawer:true
+        showSlideDrawer:false
     }
     sideDrawerClosedHandler=()=>{
      this.setState({showSlideDrawer:false})
     }
+    sideDrawerToggleHandler=()=>{
+        this.setState((prevState)=>{
+          return   {showSlideDrawer:!prevState.showSlideDrawer}
+        })
+    }
     render(){
         return(
             <ReactAux>
-            <Toolbar />
+            <Toolbar
+             drawerToggleClicked={this.sideDrawerToggleHandler} />
             <SideDrawer 
             open={this.state.showSlideDrawer}
             closed={this.sideDrawerClosedHandler}/>
