@@ -6,7 +6,19 @@
     align-items: center;
     box-shadow: 0 2px 1px #ccc;
     margin:auto;
-    padding :10px 0;   
+    padding :10px 0; 
+
+    
+        /* width: 2%;
+        height: 2%;
+        background: linear-gradient(#FFFD74, #FFFD74);
+        margin: 1px auto;
+        border-radius: 0px; */
+
+    
+}
+.Label {
+    background: linear-gradient(#FFFD74, #FFFD74); 
 }
 
 .OrderButton {

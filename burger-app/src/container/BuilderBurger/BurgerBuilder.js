@@ -17,7 +17,8 @@ state ={
         salad:0, 
         bacon:0 ,
         cheese:0,
-        meat:0
+        meat:0,
+        butter:0
     } ,
     totalPrice: 4,
      purchasable:false,
