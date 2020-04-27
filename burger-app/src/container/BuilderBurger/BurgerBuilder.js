@@ -1,4 +1,5 @@
 import React , {Component} from 'react'
+import axios from '../../axios-orders';
 import ReactAux from '../../hoc/ReactAux/ReactAux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls' 
@@ -95,7 +96,28 @@ removeIngredientHandler=(type)=>{
      this.setState({purchasing:false})
  }
  purchaseContinueHandler=()=>{
-     alert('You Continue')
+     //alert('You Continue')
+     const order = {
+         ingredients:this.state.ingredients,
+         price:this.state.totalPrice.toFixed(),
+         customer:{
+             name:'Rahul',
+             address:{
+                 street:'GandhChok',
+                 zipCode:456001,
+                 country:'India'
+             },
+             email:'rahulgundiya28@gmail.com'
+         },
+         deliveryMethod:'fastest'
+     }
+     axios.post('/orders.json' , order)
+     .then(response=>{
+         console.log('Submitted' ,response)
+     })
+     .catch(error=>{
+         console.log(error);
+     })
  }
     render()
     {
@@ -113,7 +135,7 @@ for(let key in disabledInfo)
             <ReactAux>
                 <Modal show ={this.state.purchasing}
                 modalClosed={this.purchaseCancelHandler}>
-                 <OrderSummary 
+               <OrderSummary 
                  ingredients={this.state.ingredients}
                  purchaseCancelled={this.purchaseCancelHandler}
                  purchaseContinued ={this.purchaseContinueHandler}
