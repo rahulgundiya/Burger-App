@@ -4,7 +4,8 @@ import ReactAux from '../../hoc/ReactAux/ReactAux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls' 
 import Modal from '../../components/UI/Modal/Modal'
-import Spinner from '../../components/UI/Spinner/Spinner'
+import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 const INGREDIENT_PRICES = {
     salad:0.2,
@@ -114,7 +115,7 @@ removeIngredientHandler=(type)=>{
          },
          deliveryMethod:'fastest'
      }
-     axios.post('/orders.json' , order)
+     axios.post('/ord' , order)
      .then(response=>{
         this.setState({loading:false , purchasing:false})
      })
@@ -166,4 +167,4 @@ orderSummary = <Spinner/>
         )
     }
 }
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder , axios);
