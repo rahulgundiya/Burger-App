@@ -30,8 +30,7 @@ class Contactdata extends Component{
                         placeholder:'ZIP Code'
                     },
                     value:''
-                    }
-                },
+                    },
                 country:{
                     elementType:'input',
                     elementConfig:{
@@ -44,7 +43,7 @@ class Contactdata extends Component{
                     elementType:'input',
                     elementConfig:{
                         type:'email',
-                        placeholder:'Email'
+                        placeholder:'Your-Email'
                     },
                     value:''
 
@@ -59,8 +58,11 @@ class Contactdata extends Component{
                 },
                 value:''
 
-        },
+        }
+    },
+
         loading:false
+    
     }
     orderHandler=(event)=>{
         event.preventDefault();
@@ -81,11 +83,24 @@ class Contactdata extends Component{
     }
     render()
     {
+    const formElemtentsArray=[];
+    for(let key in this.state.orderForm)
+    {
+        formElemtentsArray.push({
+            id:key,
+            config:this.state.orderForm[key]
+        })
+    }
         let form =( <form>
-            <Input  elementType=".." elementConfig=".." value="..."/>
-            <Input />
-            <Input />
-            <Input />
+
+            {formElemtentsArray.map(formElement=>(
+                //console.log('Value' , formElement.config.elementConfig)
+            <Input key = {formElement.id}
+             elementType={formElement.config.elementType}
+             elementConfig={formElement.config.elementConfig}
+             value={formElement.config.value}
+                />
+            ))}
             <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
 
         </form>);
