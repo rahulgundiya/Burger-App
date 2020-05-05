@@ -9,7 +9,8 @@
     display:block;
     margin-bottom: 8px;
 
-}
+    }
+ 
 .InputElement{
     outline: none;
      border: 1px solid #ccc;
@@ -26,3 +27,7 @@
     background-color: #ccc;
 
 }
+.Invalid {
+    border: 1px solid red;
+    background-color: salmon;
+}   
