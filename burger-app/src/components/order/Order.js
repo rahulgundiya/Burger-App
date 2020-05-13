@@ -9,8 +9,10 @@ const order=(props)=>{
             name:ingredientName,
             ammout:props.ingredients[ingredientName]
         })
+
+
     }
-        const ingredientOutput = ingredients.map(ig=>{
+       const ingredientOutput = ingredients.map(ig=>{
             return<span style={{
                 margin:'0 8px',
                 textTransform:'capitalize',
@@ -19,6 +21,8 @@ const order=(props)=>{
                 padding : '5px'
             }} key={ig.name}>{ig.name} ({ig.ammout})</span>
         })
+
+
     
     return(<div className={classes.Order}>
         <p>{ingredientOutput}</p>

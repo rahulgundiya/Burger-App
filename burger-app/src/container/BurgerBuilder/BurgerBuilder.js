@@ -24,6 +24,7 @@ componentDidMount()
     console.log('my' , this.props)
  axios.get('https://burger-app-8f106.firebaseio.com/ingredients.json')
 .then(response=>{
+    console.log('res'  ,response.data);
     this.setState({ingredients:response.data})
 
 })

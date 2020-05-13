@@ -180,7 +180,7 @@ orderHandler=(event)=>{
         let form =( <form onSubmit={this.orderHandler}>
 
             {formElemtentsArray.map(formElement=>(
-                //console.log('Value' , formElement.config.elementConfig)
+                
             <Input key = {formElement.id}
              elementType={formElement.config.elementType}
              elementConfig={formElement.config.elementConfig}
@@ -188,11 +188,13 @@ orderHandler=(event)=>{
              invalid = {!formElement.config.valid}
              shouldValidated={formElement.config.validation}  
              touched={formElement.config.touched}
+             errorMessage = {formElement.config.elementConfig.placeholder}
              changed={(event)=>this.inputChangedHandler(event ,
                  formElement.id)}
               
            
                 />
+                // console.log('Value' , formElement.config.elementConfig.placeholder)
             ))}
             <Button btnType="Success" disabled={!this.state.formIsValid} >ORDER</Button>
 
