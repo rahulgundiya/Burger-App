@@ -120,10 +120,15 @@ removeIngredientHandler=(type)=>{
    
  const queryParams = [];
  for (let i in this.state.ingredients) {
-     queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
- }
+     queryParams.push(encodeURIComponent(i) 
+     + '=' + encodeURIComponent(this.state.ingredients[i]));
+
+     //console.log('BurgerQuery' , queryParams);
+
+    }
  queryParams.push('price=' +this.state.totalPrice)
  const queryString = queryParams.join('&');
+ console.log('Querystring' , queryString);
  this.props.history.push({
      pathname: '/checkout',
      search: '?' + queryString

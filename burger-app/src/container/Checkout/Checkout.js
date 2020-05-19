@@ -16,14 +16,17 @@ class Checkout extends Component{
     componentWillMount() {
         let price=0;
        const query = new URLSearchParams(this.props.location.search);
+      // console.log('Query' , query.entries());
         const ingredients = {};
         for (let param of query.entries()) {
             // ['salad', '1']
             if(param[0] ==='price'){
                 price =param[1];
+                console.log('Params' , param[0])
             }
             else {
                 ingredients[param[0]]= +param[1];
+                console.log('MyParam' , ingredients[param[0]])
 
             }
         }
@@ -32,6 +35,8 @@ class Checkout extends Component{
     }
 render()
 {
+    //console.log('Contact-data' , this.state.ingredients)
+    //console.log('Contact-data' , this.state.totalPrice)
     return(
         <div>
             <CheckoutSummary ingredients={this.state.ingredients}

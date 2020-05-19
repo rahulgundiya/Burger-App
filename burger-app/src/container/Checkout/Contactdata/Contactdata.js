@@ -119,7 +119,6 @@ orderHandler=(event)=>{
         this.setState({loading:false  })
      })
     }
-    
     checkValidity(value , rules){
         let isValid=true;
         if(!rules){
@@ -140,10 +139,9 @@ orderHandler=(event)=>{
         return isValid;
 
     } 
-
     inputChangedHandler=(event, inputIdentifier )=>{
-        //console.log(event.target.value);
-        const updatedOrderForm={
+       // console.log('InputHandler' ,event.target.value);
+     const updatedOrderForm={
             ...this.state.orderForm
         };
       const updatedFormElement =
@@ -151,9 +149,10 @@ orderHandler=(event)=>{
 
       }
       updatedFormElement.value=event.target.value;
-      updatedFormElement.valid = this.checkValidity(updatedFormElement.value ,updatedFormElement.validation);
+      updatedFormElement.valid = this.checkValidity(updatedFormElement.value
+         ,updatedFormElement.validation);
       updatedFormElement.touched=true;
-      
+      //console.log('Touched' , updatedFormElement.touched)
       //console.log('Validation' , updatedFormElement)
       updatedOrderForm[inputIdentifier]=updatedFormElement;
       let formIsValid=true;
@@ -161,13 +160,11 @@ orderHandler=(event)=>{
       {
       formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
       }
-
       this.setState({orderForm:updatedOrderForm , formIsValid:formIsValid});
     }
 
 
     render()
-
     {
     const formElemtentsArray=[];
     for(let key in this.state.orderForm)
@@ -177,10 +174,8 @@ orderHandler=(event)=>{
             config:this.state.orderForm[key]
         })
     }
-        let form =( <form onSubmit={this.orderHandler}>
-
+           let form =( <form onSubmit={this.orderHandler}>
             {formElemtentsArray.map(formElement=>(
-                
             <Input key = {formElement.id}
              elementType={formElement.config.elementType}
              elementConfig={formElement.config.elementConfig}
@@ -194,7 +189,7 @@ orderHandler=(event)=>{
               
            
                 />
-                // console.log('Value' , formElement.config.elementConfig.placeholder)
+                 
             ))}
             <Button btnType="Success" disabled={!this.state.formIsValid} >ORDER</Button>
 
