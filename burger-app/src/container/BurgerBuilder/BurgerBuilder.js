@@ -1,17 +1,18 @@
 import React , {Component} from 'react'
+import {connect} from 'react-redux'
 import axios from '../../axios-orders';
 import ReactAux from '../../hoc/ReactAux/ReactAux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls' 
 import Modal from '../../components/UI/Modal/Modal'
 import Spinner from '../../components/UI/Spinner/Spinner';
+import * as actionTypes from '../../store/action'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 let INGREDIENT_PRICES = null;
 
 class BurgerBuilder extends Component {
 state ={
-    ingredients:null ,
     totalPrice: 4,
      purchasable:false,
      purchasing:false,
@@ -136,10 +137,14 @@ removeIngredientHandler=(type)=>{
 }
     render()
     {
+        console.log('Reducer Removed' , this.props.onIngredientRemoved)
+        console.log('Reducer Add' , this.props.onIngredientAdd)
 const disabledInfo = {
-    ...this.state.ingredients
+    ...this.props.ings
+    
 
 }
+console.log('Reducer' , disabledInfo)
 for(let key in disabledInfo)
 {
     disabledInfo[key] = disabledInfo[key] <= 0;
@@ -147,14 +152,14 @@ for(let key in disabledInfo)
 let orderSummary=null;
 // burger =this.state.totalError?<p>Network Error</p>:<Spinner/>
 let burger= this.state.error?<p>Ingredients can't be loaded</p>:<Spinner/>
-if(this.state.ingredients)
+if(this.props.ings)
     {
  burger= ( 
     <ReactAux>
-    <Burger ingredients={this.state.ingredients} />
+    <Burger ingredients={this.props.ings} />
     <BuildControls 
-    ingredientAdded ={this.addIngredientHandler}
-    ingredientRemoved ={this.removeIngredientHandler}
+    ingredientAdded ={this.props.onIngredientAdd}
+    ingredientRemoved ={this.props.onIngredientRemoved}
     disabled ={disabledInfo}
     purchasable={this.state.purchasable}
     ordered={this.purchaseHandler}
@@ -166,7 +171,7 @@ if(this.state.ingredients)
  
 orderSummary=
 <OrderSummary 
-ingredients={this.state.ingredients}
+ingredients={this.props.ings}
 purchaseCancelled={this.purchaseCancelHandler}
 purchaseContinued ={this.purchaseContinueHandler}
 price={this.state.totalPrice}
@@ -190,4 +195,22 @@ orderSummary = <Spinner/>
         )
     }
 }
-export default withErrorHandler(BurgerBuilder , axios);
+const mapStateToProps=state=>{
+    return {
+        ings: state.ingredients
+    }
+
+}
+const mapDispatchToProps=dispatch=>{
+    return {
+        onIngredientAdd:(ingName)=>
+         dispatch({type : actionTypes.ADD_INGREDIENT ,
+             ingredientName:ingName}),
+       onIngredientRemoved:(ingName)=>
+        dispatch({type : actionTypes.REMOVE_INGREDIENT,
+             ingredientName:ingName})
+        
+    }
+
+    }
+export default connect(mapStateToProps, mapDispatchToProps) (withErrorHandler(BurgerBuilder , axios));
