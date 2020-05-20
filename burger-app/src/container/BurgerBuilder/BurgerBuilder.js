@@ -68,24 +68,8 @@ return sum > 0
      this.setState({purchasing:false})
  }
  purchaseContinueHandler=()=>{
-     //alert('You Continue')
-    
-   
- const queryParams = [];
- for (let i in this.state.ingredients) {
-     queryParams.push(encodeURIComponent(i) 
-     + '=' + encodeURIComponent(this.state.ingredients[i]));
-
-     //console.log('BurgerQuery' , queryParams);
-
-    }
- queryParams.push('price=' +this.props.ingPrice)
- const queryString = queryParams.join('&');
- console.log('Querystring' , queryString);
- this.props.history.push({
-     pathname: '/checkout',
-     search: '?' + queryString
- });
+     //alert('You Continue'  
+ this.props.history.push('/checkout');
 }
     render()
     {
