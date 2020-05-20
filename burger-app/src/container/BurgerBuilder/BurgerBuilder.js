@@ -9,11 +9,8 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actionTypes from '../../store/action'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-let INGREDIENT_PRICES = null;
-
 class BurgerBuilder extends Component {
 state ={
-    totalPrice: 4,
      purchasable:false,
      purchasing:false,
      loading:false ,
@@ -36,8 +33,8 @@ componentDidMount()
 axios.get('https://burger-app-8f106.firebaseio.com/totalPrice.json')
 .then(response=>{
    // this.setState({totalPrice:response.data})
-   INGREDIENT_PRICES=response.data;
-   console.log('Total Price' , INGREDIENT_PRICES);
+  this.props.ingPrice=response.data;
+   console.log('Total Price' , this.props.ingPrice);
 
  })
 .catch(error=>{
@@ -60,52 +57,7 @@ const sum = Object.keys(ingredients)
 .reduce((sum ,el)=>{
     return sum+el;
 } , 0) ;
-this.setState({purchasable: sum > 0})
-}
-
-addIngredientHandler=(type)=>{
-    const oldCount = this.state.ingredients[type];   //type of ingredient are 
-    const updatedCount = oldCount+1;               //in ingredients                        
-    //console.log('hii updatedcount' , updatedCount)
-   
-    const updatedIngredients = {                // and pass to the oldCount
-        ...this.state.ingredients                 
-
-    }
-    //console.log('UpdatedIngredients' ,  updatedIngredients)
-
-    updatedIngredients[type] = updatedCount;
-     const priceAddition = INGREDIENT_PRICES[type];
-     const oldPrice = this.state.totalPrice;
-     const newPrice = oldPrice+priceAddition;
-    this.setState({totalPrice:newPrice , ingredients:updatedIngredients})
-  
-    this.updatePurchaseState(updatedIngredients)
-    //console.log('setstate ' , this.setState);
-}
-removeIngredientHandler=(type)=>{
-
-    const oldCount = this.state.ingredients[type];  
-    if(oldCount <=0)
-    {
-        return;
-    }
-    const updatedCount = oldCount-1;                                                                                                             
-    console.log('hii updatedcount' , updatedCount)
-   
-    const updatedIngredients = {               
-        ...this.state.ingredients                 
-
-    }
-    //console.log('UpdatedIngredients' ,  updatedIngredients)
-
-    updatedIngredients[type] = updatedCount;
-     const priceDeduction = INGREDIENT_PRICES[type];
-     const oldPrice = this.state.totalPrice;
-     const newPrice = oldPrice-priceDeduction;
-    this.setState({totalPrice:newPrice , ingredients:updatedIngredients})
-    this.updatePurchaseState(updatedIngredients)
-
+return sum > 0
 }
  
  purchaseHandler=() =>
@@ -127,7 +79,7 @@ removeIngredientHandler=(type)=>{
      //console.log('BurgerQuery' , queryParams);
 
     }
- queryParams.push('price=' +this.state.totalPrice)
+ queryParams.push('price=' +this.props.ingPrice)
  const queryString = queryParams.join('&');
  console.log('Querystring' , queryString);
  this.props.history.push({
@@ -161,9 +113,9 @@ if(this.props.ings)
     ingredientAdded ={this.props.onIngredientAdd}
     ingredientRemoved ={this.props.onIngredientRemoved}
     disabled ={disabledInfo}
-    purchasable={this.state.purchasable}
+    purchasable={this.updatePurchaseState(this.props.ings)}
     ordered={this.purchaseHandler}
-    price={this.state.totalPrice}
+    price={this.props.ingPrice}
     />
     </ReactAux>
     
@@ -174,7 +126,7 @@ orderSummary=
 ingredients={this.props.ings}
 purchaseCancelled={this.purchaseCancelHandler}
 purchaseContinued ={this.purchaseContinueHandler}
-price={this.state.totalPrice}
+price={this.props.ingPrice}
 />
 }
     
@@ -197,7 +149,8 @@ orderSummary = <Spinner/>
 }
 const mapStateToProps=state=>{
     return {
-        ings: state.ingredients
+        ings: state.ingredients,
+        ingPrice:state.totalPrice
     }
 
 }
