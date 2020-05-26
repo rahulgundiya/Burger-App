@@ -2,14 +2,9 @@ import * as actionTypes from '../actions/actionTypes'
 import axios from '../../axios-orders';
 
 let initialState={
-    ingredients:{
-        salad: 0,
-        cheese: 0,
-        meat: 0,
-        bacon: 0,
-        butter:0,
-    },
-    totalPrice:4
+    ingredients:null,
+    totalPrice:4,
+    error:false
 }
 let INGREDIENT_PRICES ={
     salad: 0.5,

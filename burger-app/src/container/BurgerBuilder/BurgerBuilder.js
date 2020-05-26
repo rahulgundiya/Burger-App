@@ -20,16 +20,7 @@ state ={
 componentDidMount()
 {
     console.log('my' , this.props)
- axios.get('https://burger-app-8f106.firebaseio.com/ingredients.json')
-.then(response=>{
-    console.log('res'  ,response.data);
-    this.setState({ingredients:response.data})
 
-})
-.catch(error=>{
-    this.setState({error:error})
-
-})
 axios.get('https://burger-app-8f106.firebaseio.com/totalPrice.json')
 .then(response=>{
    // this.setState({totalPrice:response.data})
