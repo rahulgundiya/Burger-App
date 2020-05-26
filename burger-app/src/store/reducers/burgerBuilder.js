@@ -1,5 +1,5 @@
-import * as actionTypes from './action'
-import axios from '../axios-orders';
+import * as actionTypes from '../actions/actionTypes'
+import axios from '../../axios-orders';
 
 let initialState={
     ingredients:{
