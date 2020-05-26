@@ -73,14 +73,9 @@ return sum > 0
 }
     render()
     {
-        console.log('Reducer Removed' , this.props.onIngredientRemoved)
-        console.log('Reducer Add' , this.props.onIngredientAdd)
 const disabledInfo = {
     ...this.props.ings
-    
-
 }
-console.log('Reducer' , disabledInfo)
 for(let key in disabledInfo)
 {
     disabledInfo[key] = disabledInfo[key] <= 0;
