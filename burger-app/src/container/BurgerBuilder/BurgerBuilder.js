@@ -20,6 +20,7 @@ state ={
 componentDidMount()
 {
     console.log('my' , this.props)
+    this.props.onInitIngredients();
 
 axios.get('https://burger-app-8f106.firebaseio.com/totalPrice.json')
 .then(response=>{
@@ -73,7 +74,7 @@ for(let key in disabledInfo)
 }
 let orderSummary=null;
 // burger =this.state.totalError?<p>Network Error</p>:<Spinner/>
-let burger= this.state.error?<p>Ingredients can't be loaded</p>:<Spinner/>
+let burger= this.props.error?<p>Ingredients can't be loaded</p>:<Spinner/>
 if(this.props.ings)
     {
  burger= ( 
@@ -120,7 +121,8 @@ orderSummary = <Spinner/>
 const mapStateToProps=state=>{
     return {
         ings: state.ingredients,
-        ingPrice:state.totalPrice
+        ingPrice:state.totalPrice,
+        error:state.error
     }
 
 }
@@ -129,7 +131,9 @@ const mapDispatchToProps=dispatch=>{
         onIngredientAdd:(ingName)=>
  dispatch(burgerBuilderActions.addIngredient(ingName)),
  onIngredientRemoved:(ingName)=>
- dispatch(burgerBuilderActions.removeIngredient(ingName))
+ dispatch(burgerBuilderActions.removeIngredient(ingName)),
+ onInitIngredients:(ingName)=>
+ dispatch(burgerBuilderActions.initIngredients())
         
     }
 
