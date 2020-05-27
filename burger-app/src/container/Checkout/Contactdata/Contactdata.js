@@ -191,7 +191,7 @@ orderHandler=(event)=>{
             <Button btnType="Success" disabled={!this.state.formIsValid} >ORDER</Button>
 
         </form>);
-        if(this.state.loading)
+        if(this.props.loading)
         {
             form=<Spinner/>
         }
@@ -206,12 +206,14 @@ orderHandler=(event)=>{
 const mapStateToProps=(state)=>{
     return {
         ings:state.ingredients,
-        price:state.totalPrice
+        price:state.totalPrice,
+        loading:state.loading
+
     }
 }
 
 const mapDispatchToProps=dispatch=>{
-   return { onOrderBurger:(orderData)=>dispatch(action.purchaseBurgerStart(orderData))
+   return { onOrderBurger:(orderData)=>dispatch(action.purchaseBurger(orderData))
 }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(Contactdata ,axios));
