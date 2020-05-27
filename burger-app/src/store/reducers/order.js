@@ -3,7 +3,7 @@ const initialState={
     orders:[],
     loading:false
 }
-const reducer=(state , action)=>{
+const reducer=(state=initialState , action)=>{
     switch(action.type){
         case actionTypes.PURCHASE_BURGER_SUCCESS:
         const newOrder={
@@ -21,7 +21,7 @@ const reducer=(state , action)=>{
                     ...state,
                     loading:true
                 }
-                
+
             case actionTypes.PURCHASE_BURGER_FAIL:
                 return {
                     ...state,
@@ -34,3 +34,4 @@ const reducer=(state , action)=>{
     }
 
 }
+export default reducer;

@@ -120,9 +120,9 @@ orderSummary = <Spinner/>
 }
 const mapStateToProps=state=>{
     return {
-        ings: state.ingredients,
-        ingPrice:state.totalPrice,
-        error:state.error
+        ings: state.burgerBuilder.ingredients,
+        ingPrice:state.burgerBuilder.totalPrice,
+        error:state.burgerBuilder.error
     }
 
 }
