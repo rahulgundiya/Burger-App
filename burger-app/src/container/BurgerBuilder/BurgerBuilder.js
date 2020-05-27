@@ -61,6 +61,7 @@ return sum > 0
  }
  purchaseContinueHandler=()=>{
      //alert('You Continue'  
+     this.props.onInitPurchase();
  this.props.history.push('/checkout');
 }
     render()
@@ -133,7 +134,8 @@ const mapDispatchToProps=dispatch=>{
  onIngredientRemoved:(ingName)=>
  dispatch(burgerBuilderActions.removeIngredient(ingName)),
  onInitIngredients:(ingName)=>
- dispatch(burgerBuilderActions.initIngredients())
+ dispatch(burgerBuilderActions.initIngredients()),
+ onInitPurchase:()=>dispatch(burgerBuilderActions.purchaseInit())
         
     }
 
