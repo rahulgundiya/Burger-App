@@ -26,6 +26,7 @@ export const purchaseBurger=(orderData)=>{
         dispatch(purchaseBurgerStart());
         axios.post('/orders.json' , orderData)
         .then(response=>{
+            console.log('Data Submitted' , response.data);
             dispatch(purchaseBurgerSuccess(response.data.name ,orderData))
           
         })
@@ -62,7 +63,7 @@ export const fetchOrdersFail=(error)=>{
 export const fetchOrders=()=>{
     return dispatch=>{
         dispatch(fetchOrdersStart())
-        axios.get('https://burger-app-8f106.firebaseio.com/orders.json')
+        axios.get('/orders.json')
         .then(response=>{
             console.log('myOrders' , response.data)
             const fetchOrders=[];

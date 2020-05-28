@@ -38,7 +38,7 @@ class Orders extends Component{
     }
     const mapDispatchToProps=dispatch=>{
         return {
-            onFetchOrders:()=>dispatch(actions.fetchOrders)
+            onFetchOrders:()=>dispatch(actions.fetchOrders())
         }
 
     }
