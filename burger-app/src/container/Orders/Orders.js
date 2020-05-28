@@ -6,10 +6,7 @@ import * as actions from '../../store/actions/Index'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import Spinner from '../../components/UI/Spinner/Spinner'
 class Orders extends Component{
-    state={
-        orders:[],
-        loading:true
-    }
+   
     componentDidMount(){
        this.props.onFetchOrders();
     }
