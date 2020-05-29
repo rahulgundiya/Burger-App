@@ -41,3 +41,24 @@ export const initIngredients=()=>{
 
     }
 }
+export const setTotalPrice=(totalPrice)=>{
+    return {
+    type:actionTypes.SET_TOTALPRICE,
+    totalPrice:totalPrice
+    }
+}
+export const initTotalPrice=()=>{
+    return dispatch=>{
+        axios.get('https://burger-app-8f106.firebaseio.com/totalPrice.json')
+.then(response=>{
+    console.log('Total Price' ,response.data)
+   // this.setState({totalPrice:response.data})
+  dispatch(setTotalPrice(response.data))
+   
+
+ })
+// .catch(error=>{
+//      dispatch(fetchTotalPriceFailed()
+//  })
+    }
+}

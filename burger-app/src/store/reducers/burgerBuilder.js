@@ -4,22 +4,21 @@ import { updateObject } from './utility'
 
 let initialState={
     ingredients:null,
-    totalPrice:4,
-    error:false
+    totalPrice:0,
+    error:false,
+ INGREDIENT_PRICES:null
+   
+
 }
-let INGREDIENT_PRICES ={
-    salad: 0.5,
-    cheese: 0.4,
-    meat: 1.3,
-    bacon: 0.7,
-    butter:1,
-};
+//let INGREDIENT_PRICES=null;
+ 
 const addIngredient =(state, action)=>{
+    console.log('Action' ,state);
     const updatedIngredient = { [action.ingredientName]: state.ingredients[action.ingredientName] + 1 }
     const updatedIngredients = updateObject( state.ingredients, updatedIngredient );
     const updatedState = {
         ingredients: updatedIngredients,
-        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+        totalPrice: state.totalPrice + state.INGREDIENT_PRICES[action.ingredientName]
     }
     return updateObject( state, updatedState );
 };
@@ -28,7 +27,7 @@ const removeIngredient =(state , action)=>{
     const updatedIngs = updateObject( state.ingredients, updatedIng );
     const updatedSt = {
         ingredients: updatedIngs,
-        totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+        totalPrice: state.totalPrice - state.INGREDIENT_PRICES[action.ingredientName]
     }
     return updateObject( state, updatedSt );
 }
@@ -41,10 +40,27 @@ const setIngredients = (state, action) => {
             meat: action.ingredients.meat,
             butter:action.ingredients.butter
         },
-        totalPrice: 4,
+        totalPrice:0,
         error: false
     } );
 };
+const setTotalPrice=(state,action)=>{
+   // console.log('Total Price Action' ,action.totalPrice);
+    //console.log('Ingredient-Price' ,state.INGREDIENT_PRICES);
+    return updateObject(state,{
+        INGREDIENT_PRICES:
+        {
+            salad: action.totalPrice.salad,
+            bacon: action.totalPrice.bacon,
+            cheese: action.totalPrice.cheese,
+            meat: action.totalPrice.meat,
+            butter:action.totalPrice.butter
+        }
+        
+    });
+   
+    
+}
 const fetchIngredientsFailed = (state, action) => {
     return updateObject( state, { error: true } );
 };
@@ -58,6 +74,7 @@ const reducer=(state=initialState,action)=>{
                  case(actionTypes.REMOVE_INGREDIENT):return removeIngredient(state, action)
                  case actionTypes.SET_INGREDIENTS:return setIngredients(state,action)
                  case actionTypes.FETCH_INGREDIENTS_FAILED:return fetchIngredientsFailed(state,action)
+                 case(actionTypes.SET_TOTALPRICE):return setTotalPrice(state ,action)
                  default:
                      return state
 

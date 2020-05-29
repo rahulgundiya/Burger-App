@@ -21,17 +21,18 @@ componentDidMount()
 {
     console.log('my' , this.props)
     this.props.onInitIngredients();
+    this.props.onInitTotalPrice();
 
-axios.get('https://burger-app-8f106.firebaseio.com/totalPrice.json')
-.then(response=>{
-   // this.setState({totalPrice:response.data})
-  this.props.ingPrice=response.data;
-   console.log('Total Price' , this.props.ingPrice);
+// axios.get('https://burger-app-8f106.firebaseio.com/totalPrice.json')
+// .then(response=>{
+//    // this.setState({totalPrice:response.data})
+//   this.props.ingPrice=response.data;
+//    console.log('Total Price' , this.props.ingPrice);
 
- })
-.catch(error=>{
-     this.setState({totalError:error})
- })
+//  })
+// .catch(error=>{
+//      this.setState({totalError:error})
+//  })
  
 }
 
@@ -78,6 +79,7 @@ let orderSummary=null;
 let burger= this.props.error?<p>Ingredients can't be loaded</p>:<Spinner/>
 if(this.props.ings)
     {
+        console.log('Props Ingprice' , this.props.ingPrice)
  burger= ( 
     <ReactAux>
     <Burger ingredients={this.props.ings} />
@@ -135,6 +137,7 @@ const mapDispatchToProps=dispatch=>{
  dispatch(burgerBuilderActions.removeIngredient(ingName)),
  onInitIngredients:(ingName)=>
  dispatch(burgerBuilderActions.initIngredients()),
+ onInitTotalPrice:(totalPrice)=>dispatch(burgerBuilderActions.initTotalPrice()),
  onInitPurchase:()=>dispatch(burgerBuilderActions.purchaseInit())
         
     }
