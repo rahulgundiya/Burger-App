@@ -132,12 +132,13 @@ const mapStateToProps=state=>{
 const mapDispatchToProps=dispatch=>{
     return {
         onIngredientAdd:(ingName)=>
- dispatch(burgerBuilderActions.addIngredient(ingName)),
+ dispatch(burgerBuilderActions.addIngredient(ingName)), 
  onIngredientRemoved:(ingName)=>
  dispatch(burgerBuilderActions.removeIngredient(ingName)),
  onInitIngredients:(ingName)=>
  dispatch(burgerBuilderActions.initIngredients()),
- onInitTotalPrice:(totalPrice)=>dispatch(burgerBuilderActions.initTotalPrice()),
+ onInitTotalPrice:(totalPrice)=>
+ dispatch(burgerBuilderActions.initTotalPrice()),
  onInitPurchase:()=>dispatch(burgerBuilderActions.purchaseInit())
         
     }

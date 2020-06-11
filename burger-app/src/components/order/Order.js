@@ -9,7 +9,7 @@ const order=(props)=>{
             name:ingredientName,
             ammout:props.ingredients[ingredientName]
         })
-
+ 
 
     }
        const ingredientOutput = ingredients.map(ig=>{

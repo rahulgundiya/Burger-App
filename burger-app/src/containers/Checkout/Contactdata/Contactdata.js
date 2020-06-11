@@ -114,6 +114,7 @@ orderHandler=(event)=>{
          orderData:formData
      }
      this.props.onOrderBurger(order);
+     
     
     }
     checkValidity(value , rules){
@@ -183,18 +184,15 @@ orderHandler=(event)=>{
              errorMessage = {formElement.config.elementConfig.placeholder}
              changed={(event)=>this.inputChangedHandler(event ,
                  formElement.id)}
-              
-           
-                />
-                 
+                />     
             ))}
             <Button btnType="Success" disabled={!this.state.formIsValid} >ORDER</Button>
 
-        </form>);
-        if(this.props.loading)
-        {
+          </form>);
+          if(this.props.loading)
+          {
             form=<Spinner/>
-        }
+          }
         return(
             <div className={classes.Contactdata}>
                 <h4>Enter Your Contact Data</h4>
