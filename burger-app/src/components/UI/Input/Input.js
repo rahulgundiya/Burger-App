@@ -8,7 +8,7 @@ const input = (props) =>{
     if(props.invalid && props.shouldValidate &&props.touched){
     validationError=<p className={classes.ValidationError}>Please enter a {props.errorMessage}</p>
         inputClasses.push(classes.Invalid)
-        console.log("error message" ,props.errorMessage)
+       // console.log("error message" ,props.errorMessage)
         
     }
     
