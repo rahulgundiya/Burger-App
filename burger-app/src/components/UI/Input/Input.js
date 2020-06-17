@@ -3,7 +3,7 @@ import classes from './Input.module.css';
 const input = (props) =>{
     let inputElement = null; 
     let validationError=null; 
-    console.log("error message" ,props.errorMessage)
+   // console.log("error message" ,props.errorMessage)
     const inputClasses =[classes.InputElement];
     if(props.invalid && props.shouldValidate &&props.touched){
     validationError=<p className={classes.ValidationError}>Please enter a {props.errorMessage}</p>
